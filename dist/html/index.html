@@ -1,0 +1,35 @@
+
+<head>
+    <title>正在登录...</title>
+</head>
+<script src="//imgcache.qq.com/qcloud/cloudbase-js-sdk/1.6.0/cloudbase.full.js"></script>
+<script>
+const app = cloudbase.init({
+    env: 'chatgpt-3gobj94qcee3e357' // 您的环境id
+});
+const auth = app.auth();
+const provider = auth.weixinAuthProvider({appid:"wxffa84f6c072285e4",scope:"snsapi_base"});
+function redirectToChat(loginState){
+    window.sessionStorage.setItem('wxLoginState', loginState);
+    location.replace("chat.html")
+}
+
+async function login(){
+    // 1. 登录前先判断当前是否已经登录
+    const loginState = await auth.getLoginState();
+    if(loginState){  // 2. 调用微信登录API
+        redirectToChat(loginState);
+    }else{
+        provider.getRedirectResult()
+        .then((loginState)=>{
+            if(loginState){
+                redirectToChat(loginState);
+            }else{// 未登录，唤起微信登录     
+                provider.signInWithRedirect();
+            }
+        }); 
+    }
+}
+login();
+</script>
+
