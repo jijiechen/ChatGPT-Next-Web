@@ -29,9 +29,12 @@ export const useAccessStore = create<AccessControlStore>()(
       accessCode: "",
       needCode: true,
       hideUserApiKey: false,
-      openaiUrl: "/api/openai/",
+      openaiUrl: "https://api.chat.jijiechen.com/api/openai/",
 
       enabledAccessControl() {
+        // 暂时禁掉前端身份需求
+        return false;
+        
         get().fetch();
 
         return get().needCode;
@@ -43,6 +46,9 @@ export const useAccessStore = create<AccessControlStore>()(
         set(() => ({ token }));
       },
       isAuthorized() {
+        // 暂时禁掉前端身份需求
+        return true;
+
         get().fetch();
 
         // has token or has code or disabled access control
