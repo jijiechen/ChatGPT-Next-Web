@@ -31,7 +31,4 @@ FROM nginx:1.25.0-alpine
 WORKDIR /usr/share/nginx/html
 
 COPY --from=builder /app/out ./
-
-RUN mv index.html chat.html
-COPY --from=builder /app/tcb_auth.html ./index.html
 COPY --from=builder /app/MP_verify_jVn5jfIjPg6sKUqo.txt ./
