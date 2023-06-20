@@ -11,11 +11,11 @@ export interface AccessControlStore {
 
   needCode: boolean;
   hideUserApiKey: boolean;
-  openaiUrl: string;
 
   updateToken: (_: string) => void;
   updateCode: (_: string) => void;
   enabledAccessControl: () => boolean;
+  openaiUrl: () => string;
   isAuthorized: () => boolean;
   fetch: () => void;
 }
@@ -29,7 +29,10 @@ export const useAccessStore = create<AccessControlStore>()(
       accessCode: "",
       needCode: true,
       hideUserApiKey: false,
-      openaiUrl: "https://api.chat.jijiechen.com/api/openai/",
+
+      openaiUrl(apiProvider : string){
+        return `https://api.chat.jijiechen.com/api/${apiProvider}/`;
+      },
 
       enabledAccessControl() {
         // 需要 code

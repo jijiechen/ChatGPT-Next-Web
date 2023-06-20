@@ -484,6 +484,27 @@ export function Settings() {
         </List>
 
         <List>
+          <ListItem title="API">
+              <Select
+                value={config.apiProvider}
+                onChange={(e) => {
+                  updateConfig(
+                    (config) => (config.apiProvider = e.target.value),
+                  );
+                }}
+              >
+                <option value="azure" key="azure">
+                  Azure OpenAI
+                </option>
+
+                <option value="openai" key="openai">
+                  OpenAI
+                </option>
+
+              </Select>
+            </ListItem>
+
+
           {enabledAccessControl ? (
             <ListItem
               title={Locale.Settings.AccessCode.Title}
