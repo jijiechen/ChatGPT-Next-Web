@@ -15,7 +15,7 @@ export interface AccessControlStore {
   updateToken: (_: string) => void;
   updateCode: (_: string) => void;
   enabledAccessControl: () => boolean;
-  openaiUrl: () => string;
+  openaiUrl: (_: string) => string;
   isAuthorized: () => boolean;
   fetch: () => void;
 }
