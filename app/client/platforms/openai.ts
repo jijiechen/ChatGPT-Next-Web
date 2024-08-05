@@ -57,11 +57,15 @@ export class ChatGPTApi implements LLMApi {
 
     try {
       const chatPath = this.path(this.ChatPath);
+      const reqHeaders = getHeaders();
+      if (chatPath.indexOf('azure') > -1){
+        reqHeaders["x-model-name"] = modelConfig.model
+      }
       const chatPayload = {
         method: "POST",
         body: JSON.stringify(requestPayload),
         signal: controller.signal,
-        headers: getHeaders(),
+        headers: reqHeaders,
       };
 
       // make a fetch request
