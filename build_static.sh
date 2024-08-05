@@ -1,8 +1,10 @@
 #!/bin/bash
 
+set -e
+
 image_tag=$(date +%s)
 image_tag=chatweb:$image_tag
-docker build -t $image_tag -f .\static.Dockerfile .
+docker build -t $image_tag -f ./static.Dockerfile .
 
 rm -rf ./dist/html
 docker run -v $(pwd):/src --rm --name static_file_server -d --entrypoint sleep $image_tag infinity
