@@ -41,3 +41,4 @@ dev
 
 # docker-compose env files
 .env
+dist
