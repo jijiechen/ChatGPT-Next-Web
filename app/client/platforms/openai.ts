@@ -28,8 +28,6 @@ export class ChatGPTApi implements LLMApi {
   }
 
   async chat(options: ChatOptions) {
-    // api.chat.jijiechen.com 不支持 stream
-    options.config.stream = false;
     const messages = options.messages.map((v) => ({
       role: v.role,
       content: v.content,
